@@ -6,13 +6,16 @@ public class ChopStick {
     // Le numéro de chaque baguette
     private final int myNumber;
     // Est-ce que ma baguette est libre ?
-    public boolean iAmFree = true;
+    private boolean iAmFree = true;
 
     public ChopStick() {
         // Chaque baguette est numérotée 
         myNumber = ++stickCount;
     }
-    public void take(){
+    public void take() throws InterruptedException{
+        while(!this.iAmFree){
+            wait();
+        }
         this.iAmFree=false;
         this.stickCount-=1;
 
