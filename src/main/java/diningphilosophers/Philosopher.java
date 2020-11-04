@@ -22,6 +22,33 @@ public class Philosopher
 
     @Override
     public void run() {
+        while (true){
+            try{
+                
+                this.think();
+                if(this.myLeftStick.iAmFree && this.myRightStick.iAmFree){
+                    this.myLeftStick.take();
+                    System.out.println(this.getName()+" prend "+this.myLeftStick.toString());
+                    this.myRightStick.take();
+                    System.out.println(this.getName()+" prend "+this.myRightStick.toString());
+
+                    this.eat();
+
+                    this.myLeftStick.release();
+                    System.out.println(this.getName()+" pose "+this.myLeftStick.toString());
+                    this.myRightStick.release();
+                    System.out.println(this.getName()+" pose "+this.myRightStick.toString());
+                }
+                else{
+                    sleep(200);
+                    this.run();
+                }
+                
+            }
+            catch(InterruptedException ex){
+                break;
+            }
+        }
 
     }
 
